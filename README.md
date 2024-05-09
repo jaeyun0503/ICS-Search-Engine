@@ -1,3 +1,4 @@
 # assignment3
 
-# Jenny plz carry us
+jonathan and kim hard carry ^\_\_^
+jenni is simply a leech mwahaha
