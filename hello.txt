@@ -1,0 +1,772 @@
+{
+    "": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 75,
+            "weight": 0
+        }
+    },
+    "login": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 16,
+            "weight": 85
+        }
+    },
+    "rt": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 14,
+            "weight": 0
+        }
+    },
+    "for": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 9,
+            "weight": 0
+        }
+    },
+    "ic": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 10,
+            "weight": 0
+        }
+    },
+    "uci": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 10,
+            "weight": 0
+        }
+    },
+    "edu": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 10,
+            "weight": 0
+        }
+    },
+    "skip": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "menu": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "not": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 7,
+            "weight": 0
+        }
+    },
+    "log": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "in": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "4": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 26,
+            "weight": 0
+        }
+    },
+    "1": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 15,
+            "weight": 0
+        }
+    },
+    "usernam": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 10,
+            "weight": 0
+        }
+    },
+    "password": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 10,
+            "weight": 0
+        }
+    },
+    "local": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "help": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 7,
+            "weight": 0
+        }
+    },
+    "pleas": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 9,
+            "weight": 0
+        }
+    },
+    "contact": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 9,
+            "weight": 0
+        }
+    },
+    "support": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 9,
+            "weight": 0
+        }
+    },
+    "time": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "to": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 10,
+            "weight": 0
+        }
+    },
+    "display": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "0": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "012167": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "copyright": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "1996": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "2016": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "best": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "practic": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "solut": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "llc": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 6,
+            "weight": 0
+        }
+    },
+    "distribut": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "under": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "version": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "2": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "of": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "the": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "gnu": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "gpl": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "inquir": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "about": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "train": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "custom": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "develop": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "or": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "licens": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "sale": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "bestpract": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "com": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "window": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 8,
+            "weight": 0
+        }
+    },
+    "currentus": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "config": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "webpath": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "messageboxrichtextheight": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "200": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "rtname": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "messageboxrichtext": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "i18n": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "catalog": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "load": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 3,
+            "weight": 0
+        }
+    },
+    "remov": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "attach": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "warn": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "regex": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "battach": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "histori": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "scroll": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "error": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "could": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "ticket": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "reason": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "quot": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "filenam": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "with": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "doubl": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "can": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "be": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "upload": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "check": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "shortcut": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "unabl": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "open": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "tri": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "again": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "jqueri": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 5,
+            "weight": 0
+        }
+    },
+    "loadtitleboxst": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "function": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "'": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 3,
+            "weight": 0
+        }
+    },
+    "x23user'": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "focu": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "if": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "top": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "self": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 3,
+            "weight": 0
+        }
+    },
+    "document": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 3,
+            "weight": 0
+        }
+    },
+    "write": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "locat": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "settimeout": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "bodi": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "innerhtml": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "onload": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "hash": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "var": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "form": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 4,
+            "weight": 0
+        }
+    },
+    "name": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "attr": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "'action'": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 2,
+            "weight": 0
+        }
+    },
+    "replac": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    },
+    "''": {
+        "document_frequency": 1,
+        "0": {
+            "token_frequency": 1,
+            "weight": 0
+        }
+    }
+}
