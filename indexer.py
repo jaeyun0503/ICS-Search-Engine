@@ -206,5 +206,10 @@ if __name__ == '__main__':
 
     print("Unique tokens:", len(indexer.index))
     print("Number of documents:", indexer.doc_id + 1)
+<<<<<<< HEAD
     # total = sum(os.path.getsize(f'./res/temporary_save_{i}.pkl') for i in range(indexer.partial_count)) / 1024
     # print("Total size in disk:", total, "KB")
+=======
+    total = sum(os.path.getsize(f'./res/temporary_save_{i}.pkl') for i in range(indexer.partial_count)) / 1024
+    print("Total size in disk:", total, "KB")
+>>>>>>> a0bc3d71ccbe83b95d414e89f27078cd84d7e357
