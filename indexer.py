@@ -9,6 +9,22 @@ from collections import defaultdict
 from nltk.stem import PorterStemmer
 
 
+class Tokeninfo:
+    def __init__(self, token):
+        self.token = token
+        self.document_frequency = 0
+        self.starting_letter = token[0]
+        self.occurrence = {} # Key: doc_id     Value: another dict with info
+        # doc_id: {
+        #     "token_frequency": int,
+        #     "weight": int, 
+        #     "locations": list of index
+        # }
+
+
+    def add_occurrence():
+        pass
+
 class Indexer:
     def __init__(self):
         self.directory_path = "./DEV/"
