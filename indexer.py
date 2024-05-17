@@ -194,7 +194,7 @@ class Indexer:
             pickle.dump(reference_index, file)
         
         with open('./res/urls.pkl', "wb") as file:
-            pickle.dump(self.addresses)
+            pickle.dump(self.addresses, file)
         return result_index
 
 

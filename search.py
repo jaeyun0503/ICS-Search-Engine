@@ -43,13 +43,13 @@ def calculate_tfidf(query, top_k=5):
     
 
 def search():
+    global reference_index, urls
+    
     with open("./res/reference_index.pkl", "rb") as file:
         reference_index = pickle.load(file)
 
     with open("./res/urls", "rb") as file:
         urls = pickle.load(file)
-
-    global reference_index, urls
 
 
     while True: 
