@@ -42,6 +42,7 @@ class Indexer:
         # }
         self.index = dict()
             
+
     def parse_files(self):
         """
         Parses the json files under the directory
@@ -78,6 +79,7 @@ class Indexer:
         if self.index:
             self.offload()
     
+
     def tokenize(self, text):
         """
         Gets the text from the file and stem the words
@@ -102,6 +104,7 @@ class Indexer:
             self.index[key]["document_frequency"] += 1
             self.index[key][self.doc_id] = {"token_frequency": value, "weight": 0}
     
+
     def update_weights(self, soup):
         """
         Update the weights of token in each document
@@ -111,14 +114,20 @@ class Indexer:
                 if word in self.index and self.doc_id in self.index[word]:
                     self.index[word][self.doc_id]["weight"] += self.weights.get(tag.name, 1)
 
+
     def offload(self):
         """
         Offloads the data into pkl files
         """
-        filename = f'temporary_save_{self.partial_count}.pkl'
+        directory_path = "./res"
+        if not os.path.exists(directory_path):
+            os.makedirs(directory_path)
+
+        filename = f'{directory_path}/temporary_save_{self.partial_count}.pkl'
         with open(filename, "wb") as file:
             pickle.dump(self.index, file)
         self.partial_count += 1
+
 
     def merge(self):
         """
@@ -127,7 +136,7 @@ class Indexer:
         result_index = {}
         # Loops over every pkl file
         for i in range(self.partial_count):
-            filename = f'temporary_save_{i}.pkl'
+            filename = f'./res/temporary_save_{i}.pkl'
             
             with open(filename, "rb") as file:
                 partial = pickle.load(file)
@@ -154,6 +163,7 @@ class Indexer:
 
         return result_index
 
+
 if __name__ == '__main__':
     indexer = Indexer()
     indexer.parse_files()
@@ -161,5 +171,5 @@ if __name__ == '__main__':
 
     print("Unique tokens:", len(indexer.index))
     print("Number of documents:", indexer.doc_id + 1)
-    total = sum(os.path.getsize(f'temporary_save_{i}.pkl') for i in range(indexer.partial_count)) / 1024
+    total = sum(os.path.getsize(f'./res/temporary_save_{i}.pkl') for i in range(indexer.partial_count)) / 1024
     print("Total size in disk:", total, "KB")
