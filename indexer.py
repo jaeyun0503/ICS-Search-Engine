@@ -1,13 +1,16 @@
 import json
+import math
 import os
-import re
 import pickle
+import re
 import sys
 
 from bs4 import BeautifulSoup
 from collections import defaultdict
 from nltk.stem import PorterStemmer
+from urllib.parse import urldefrag
 
+DOCUMENTS = 55395
 
 class Indexer:
     def __init__(self):
@@ -16,6 +19,7 @@ class Indexer:
         self.stemmer = PorterStemmer()        # Stemmer boohoo
         self.partial_count = 0                # Number to keep track of offloading
         self.size_threshold = 5 * 1024 * 1024 # 5 MB
+        self.addresses = {}                    # For saving doc_ids to urls
 
         # dictionary with weights for different html tags
         self.weights = {
@@ -35,7 +39,7 @@ class Indexer:
         #     "token": {
         #         "document_frequency": int,
         #         doc_id: {
-        #             "token_frequency: int,
+        #             "token_frequency": int,
         #             "weight": int
         #         }
         #     }
@@ -53,7 +57,7 @@ class Indexer:
         for subdir, dirs, files in os.walk(self.directory_path):
             for file in files:
                 file_path = os.path.join(subdir, file)
-
+                
                 with open(file_path, "r") as file:
                     try:
                         # loads the json data from the file
@@ -70,6 +74,8 @@ class Indexer:
                         if sys.getsizeof(self.index) > self.size_threshold:
                             self.offload()
                             self.index.clear()
+                        self.addresses[self.doc_id] = urldefrag(data["url"]).url
+
                     except Exception as e:
                         print("error: ", e)
 
@@ -102,7 +108,7 @@ class Indexer:
         # updates token's document frequency
         for key, value in words.items():
             self.index[key]["document_frequency"] += 1
-            self.index[key][self.doc_id] = {"token_frequency": value, "weight": 0}
+            self.index[key][self.doc_id] = {"token_frequency": value/sum(words.values()), "weight": 0}
     
 
     def update_weights(self, soup):
@@ -131,7 +137,7 @@ class Indexer:
 
     def merge(self):
         """
-        Retrieving data from different pickle files
+        Retrieving data from different pickle files, creates a final data file and a reference index file
         """
         result_index = {}
         # Loops over every pkl file
@@ -161,10 +167,39 @@ class Indexer:
                             result_index[key][doc_id]["token_frequency"] += info["token_frequency"]
                             result_index[key][doc_id]["weight"] += info["weight"]
 
+            os.remove(filename)
+        N = DOCUMENTS
+        for token, postings in result_index.items():
+            df = postings["document_frequency"]
+            idf = math.log(N / (1 + df))
+            for doc_id, info in postings.items():
+                if doc_id != "document_frequency":
+                    tf = info["token_frequency"]
+                    if info["weight"] == 0:
+                        result_index[token][doc_id]["token_frequency"] = tf * idf
+                    else:
+                        result_index[token][doc_id]["token_frequency"] = (tf * idf) * info["weight"]
+                    # token_frequency now has tf-idf score
+
+                    
+
+        reference_index = {}             # Can be used later for seeking
+        with open(f'./res/inverted_index.pkl', "wb") as file:
+            for token, data in result_index.items():
+                index = file.tell()
+                pickle.dump({token: data}, file)
+                reference_index[token] = index
+
+        with open('./res/reference_index.pkl', "wb") as file:
+            pickle.dump(reference_index, file)
+        
+        with open('./res/urls.pkl', "wb") as file:
+            pickle.dump(self.addresses)
         return result_index
 
 
 if __name__ == '__main__':
+
     indexer = Indexer()
     indexer.parse_files()
     result = indexer.merge()
