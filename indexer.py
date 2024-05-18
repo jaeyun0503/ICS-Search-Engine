@@ -71,19 +71,20 @@ class Indexer:
                         self.update_weights(soup)
 
                         # checks if the size of index exceeds the threshold
-                        if sys.getsizeof(self.index) > self.size_threshold:
-                            self.offload()
-                            self.index.clear()
+                        # if sys.getsizeof(self.index) > self.size_threshold:
+                        #     self.offload()
+                        #     self.index.clear()
                         self.addresses[self.doc_id] = urldefrag(data["url"]).url
 
                     except Exception as e:
                         print("error: ", e)
 
                 self.doc_id += 1
+                print(self.doc_id)
 
         # if the index is not empty, offload it
-        if self.index:
-            self.offload()
+        # if self.index:
+        #     self.offload()
     
 
     def tokenize(self, text):
@@ -141,37 +142,39 @@ class Indexer:
         """
         result_index = {}
         # Loops over every pkl file
-        for i in range(self.partial_count):
-            filename = f'./res/temporary_save_{i}.pkl'
+        # for i in range(self.partial_count):
+        #     filename = f'./res/temporary_save_{i}.pkl'
             
-            with open(filename, "rb") as file:
-                partial = pickle.load(file)
-                # key - token
-                # value - token_dict
-                for key, value in partial.items():
-                    if key not in result_index:
-                        result_index[key] = {"document_frequency": 0}
-                    # key - token_frequency & doc_id
-                    # value - token_frequency: int, doc_id: dict
-                    for doc_id, info in value.items():
-                        if doc_id == "document_frequency":
-                            result_index[key]["document_frequency"] += info
-                        else:
-                            if doc_id not in result_index[key]:
-                                result_index[key][doc_id] = {
-                                    "token_frequency": 0,
-                                    "weight": 0
-                                }
-                                result_index[key]["document_frequency"] += 1
+        #     with open(filename, "rb") as file:
+        #         partial = pickle.load(file)
+        #         # key - token
+        #         # value - token_dict
+        #         for key, value in partial.items():
+        #             if key not in result_index:
+        #                 result_index[key] = {"document_frequency": 0}
+        #             # key - token_frequency & doc_id
+        #             # value - token_frequency: int, doc_id: dict
+        #             for doc_id, info in value.items():
+        #                 if doc_id == "document_frequency":
+        #                     result_index[key]["document_frequency"] += info
+        #                 else:
+        #                     if doc_id not in result_index[key]:
+        #                         result_index[key][doc_id] = {
+        #                             "token_frequency": 0,
+        #                             "weight": 0
+        #                         }
+        #                         result_index[key]["document_frequency"] += 1
 
-                            result_index[key][doc_id]["token_frequency"] += info["token_frequency"]
-                            result_index[key][doc_id]["weight"] += info["weight"]
+        #                     result_index[key][doc_id]["token_frequency"] += info["token_frequency"]
+        #                     result_index[key][doc_id]["weight"] += info["weight"]
 
-            os.remove(filename)
+        #     os.remove(filename)
+
+        result_index = self.index
         N = DOCUMENTS
         for token, postings in result_index.items():
             df = postings["document_frequency"]
-            idf = math.log(N / (1 + df))
+            idf = math.log(N / (df))
             for doc_id, info in postings.items():
                 if doc_id != "document_frequency":
                     tf = info["token_frequency"]

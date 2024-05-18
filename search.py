@@ -18,28 +18,6 @@ def tokenize_query(query):
     return [stemmer.stem(token) for token in tokens]
 
 
-# def calculate_tfidf(query, top_k=5):
-#     """
-#     Calculate TF-IDF scores for query matching documents
-#     """
-#     N = DOCUMENTS
-#     doc_scores = defaultdict(float)
-    
-
-#     with open("./res/inverted_index.pkl", "rb") as file:
-#         for token in query:
-#             if token in reference_index: 
-#                 index = reference_index[token]
-#                 postings = file.seek(index)[token]
-#                 for doc_id, info in postings.items():
-#                     if doc_id != "document_frequency":
-#                         doc_scores[doc_id] += info["token_frequency"]
-        
-#     # Sort documents by their TF-IDF score
-#     sorted_docs = sorted(doc_scores.items(), key=lambda item: item[1], reverse=True)
-
-#     return sorted_docs[:top_k]
-
 def calculate_tfidf(query, top_k=20):
     """
     Calculate TF-IDF scores for query matching documents
