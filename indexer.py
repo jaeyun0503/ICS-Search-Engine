@@ -4,6 +4,7 @@ import os
 import pickle
 import re
 import sys
+import csv
 
 from bs4 import BeautifulSoup
 from collections import defaultdict
@@ -20,6 +21,8 @@ class Indexer:
         self.partial_count = 0                # Number to keep track of offloading
         self.size_threshold = 5 * 1024 * 1024 # 5 MB
         self.addresses = {}                    # For saving doc_ids to urls
+        self.crawled_pages = set()
+        self.crawled_urls = set()
 
         # dictionary with weights for different html tags
         self.weights = {
@@ -64,17 +67,19 @@ class Indexer:
                         data = json.load(file)
                         # parses the html content using lxml's html parser 
                         soup = BeautifulSoup(data["content"], 'lxml')
+                        temp_url = urldefrag(data["url"]).url
 
-                        # tokenizes document's html content & updates index
-                        self.tokenize(soup.get_text())
-                        # update the weights of each token based on its tag
-                        self.update_weights(soup)
+                        if temp_url not in self.crawled_urls:
+                            # tokenizes document's html content & updates index
+                            self.tokenize(soup)
 
-                        # checks if the size of index exceeds the threshold
-                        # if sys.getsizeof(self.index) > self.size_threshold:
-                        #     self.offload()
-                        #     self.index.clear()
-                        self.addresses[self.doc_id] = urldefrag(data["url"]).url
+                            self.crawled_urls.add(temp_url)
+
+                            # checks if the size of index exceeds the threshold
+                            if sys.getsizeof(self.index) > self.size_threshold:
+                                self.offload()
+                                self.index.clear()
+                            self.addresses[self.doc_id] = temp_url
 
                     except Exception as e:
                         print("error: ", e)
@@ -83,21 +88,23 @@ class Indexer:
                 print(self.doc_id)
 
         # if the index is not empty, offload it
-        # if self.index:
-        #     self.offload()
+        if self.index:
+            self.offload()
     
 
-    def tokenize(self, text):
+    def tokenize(self, soup):
         """
         Gets the text from the file and stem the words
         """
         # keeps track of tokens and the number of documents they appear in
+        token_list = []
         words = defaultdict(int) 
 
         # splits the text into alphanumeric tokens 
-        for token in re.split("[^a-zA-Z0-9']+", text.lower()):
+        for token in re.split("[^a-zA-Z0-9']+", soup.get_text().lower()):
             # stems the token 
             stemmed = self.stemmer.stem(token)
+            token_list.append(stemmed)
 
             # checks if the token is not already in the index, and updates it accordingly
             if token not in self.index:
@@ -106,10 +113,19 @@ class Indexer:
             # increments token count
             words[token] += 1
 
+        hash_value = hash(tuple(token_list))
+        if hash_value in self.crawled_pages:
+            return
+
+        self.crawled_pages.add(hash_value)
+
         # updates token's document frequency
         for key, value in words.items():
             self.index[key]["document_frequency"] += 1
             self.index[key][self.doc_id] = {"token_frequency": value/sum(words.values()), "weight": 0}
+
+        # update the weights of each token based on its tag
+        self.update_weights(soup)
     
 
     def update_weights(self, soup):
@@ -142,35 +158,34 @@ class Indexer:
         """
         result_index = {}
         # Loops over every pkl file
-        # for i in range(self.partial_count):
-        #     filename = f'./res/temporary_save_{i}.pkl'
+        for i in range(self.partial_count):
+            filename = f'./res/temporary_save_{i}.pkl'
             
-        #     with open(filename, "rb") as file:
-        #         partial = pickle.load(file)
-        #         # key - token
-        #         # value - token_dict
-        #         for key, value in partial.items():
-        #             if key not in result_index:
-        #                 result_index[key] = {"document_frequency": 0}
-        #             # key - token_frequency & doc_id
-        #             # value - token_frequency: int, doc_id: dict
-        #             for doc_id, info in value.items():
-        #                 if doc_id == "document_frequency":
-        #                     result_index[key]["document_frequency"] += info
-        #                 else:
-        #                     if doc_id not in result_index[key]:
-        #                         result_index[key][doc_id] = {
-        #                             "token_frequency": 0,
-        #                             "weight": 0
-        #                         }
-        #                         result_index[key]["document_frequency"] += 1
+            with open(filename, "rb") as file:
+                partial = pickle.load(file)
+                # key - token
+                # value - token_dict
+                for key, value in partial.items():
+                    if key not in result_index:
+                        result_index[key] = {"document_frequency": 0}
+                    # key - token_frequency & doc_id
+                    # value - token_frequency: int, doc_id: dict
+                    for doc_id, info in value.items():
+                        if doc_id == "document_frequency":
+                            result_index[key]["document_frequency"] += info
+                        else:
+                            if doc_id not in result_index[key]:
+                                result_index[key][doc_id] = {
+                                    "token_frequency": 0,
+                                    "weight": 0
+                                }
+                                result_index[key]["document_frequency"] += 1
 
-        #                     result_index[key][doc_id]["token_frequency"] += info["token_frequency"]
-        #                     result_index[key][doc_id]["weight"] += info["weight"]
+                            result_index[key][doc_id]["token_frequency"] += info["token_frequency"]
+                            result_index[key][doc_id]["weight"] += info["weight"]
 
-        #     os.remove(filename)
+            os.remove(filename)
 
-        result_index = self.index
         N = DOCUMENTS
         for token, postings in result_index.items():
             df = postings["document_frequency"]
@@ -193,6 +208,21 @@ class Indexer:
                 pickle.dump({token: data}, file)
                 reference_index[token] = index
 
+        with open('./res/inverted_index.csv', 'w', newline='') as csvfile:
+            fieldnames = ['token', 'doc_id', 'token_frequency', 'weight']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+
+            for token, postings in result_index.items():
+                for doc_id, info in postings.items():
+                    if doc_id != "document_frequency":
+                        writer.writerow({
+                            'token': token,
+                            'doc_id': doc_id,
+                            'token_frequency': info['token_frequency'],
+                            'weight': info['weight']
+                        })
+
         with open('./res/reference_index.pkl', "wb") as file:
             pickle.dump(reference_index, file)
         
@@ -202,7 +232,6 @@ class Indexer:
 
 
 if __name__ == '__main__':
-
     indexer = Indexer()
     indexer.parse_files()
     result = indexer.merge()
