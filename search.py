@@ -3,8 +3,10 @@ from nltk.stem import PorterStemmer
 import time
 import pickle
 import math
+import json
 
 from indexer import *
+from stopWords import STOPWORDS
 from collections import defaultdict
 
 reference_index = {}
@@ -15,7 +17,11 @@ DOCUMENTS = 55395
 def tokenize_query(query):
     tokens = re.split("[^a-zA-Z0-9']+", query.lower())
     stemmer = PorterStemmer()
-    return [stemmer.stem(token) for token in tokens]
+    stopwords_count = sum(1 for token in tokens if token in STOPWORDS)
+    if stopwords_count > len(tokens) / 2:
+        return [stemmer.stem(token) for token in tokens]
+    else:
+        return [stemmer.stem(token) for token in tokens if token not in STOPWORDS]
 
 
 def calculate_tfidf(query, top_k=20):
@@ -25,13 +31,13 @@ def calculate_tfidf(query, top_k=20):
     N = DOCUMENTS
     doc_scores = defaultdict(float)
 
-    with open("./res/inverted_index.pkl", "rb") as file:
+    with open("./res/inverted_index.json", "r") as file:
         for token in query:
             if token in reference_index: 
                 index = reference_index[token]
                 file.seek(index)
-                data = pickle.load(file) #use pickle.load
-                print(data)
+                line = file.readline()
+                data = json.loads(line) 
                 postings = data[token]
                 for doc_id, info in postings.items():
                     if doc_id != "document_frequency":
@@ -84,16 +90,38 @@ def calculate_tfidf(query, top_k=20):
     
 #     return sorted_docs[:top_k]
 
+def test(query, top_k=20):
+    """
+    Calculate TF-IDF scores for query matching documents
+    """
+    N = DOCUMENTS
+    doc_scores = defaultdict(float)
+
+    with open("./res/inverted_index.json", "r") as file:
+        while True:
+            try:
+                data = json.load(file)
+                for token in query:
+                    if token in data:
+                        postings = data[token]
+                        for doc_id, info in postings.items():
+                            if doc_id != "document_frequency":
+                                doc_scores[doc_id] += info["token_frequency"]
+            except EOFError:
+                break
+
+    return doc_scores
+
 
 
 def search():
     global reference_index, urls
     
-    with open("./res/reference_index.pkl", "rb") as file:
-        reference_index = pickle.load(file)
+    with open("./res/reference_index.json", "r") as file:
+        reference_index = json.load(file)
 
-    with open("./res/urls.pkl", "rb") as file:
-        urls = pickle.load(file)
+    with open("./res/urls.json", "r") as file:
+        urls = json.load(file)
 
 
     while True: 
@@ -106,10 +134,10 @@ def search():
 
         query_tokens = tokenize_query(query)
         sorted_docs = calculate_tfidf(query_tokens)
-        # for each token, find index containing doc id of where that term occurs 
-        # find common doc id btwn the tokens 
-        # rank them ?? 
-        # map the doc id(s) back to the url(s)
+        # result = test(query_tokens)
+        # print(result)
+        print(sorted_docs)
+
         return_list = []
         for i in range(len(sorted_docs)):
             if urls[sorted_docs[i][0]] not in return_list:
