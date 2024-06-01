@@ -1,0 +1,30 @@
+In the initial stages, we encountered difficulties with the first ten queries listed below. 
+One notable issue was our handling of queries that contained multiple words. 
+Initially, we only considered the first word, neglecting the rest. 
+Another challenge pertained to our approach in assigning weights. 
+At first, we used large weight values, leading to considerable discrepancies between them. 
+However, by reducing the weights, we achieved more accurate search results. 
+Additionally, we enhanced the efficiency of our search algorithm by considering stopwords only if they constituted more than half of the query. 
+
+
+autoregressive neural sequence
+bayesian optimal experimental design
+cybersecurity policy
+department of computer science
+game design and interactive media
+interdisciplinary science and engineering building
+introduction to programming
+to be or not to be
+with great power comes great responsibilities
+against ourselves
+academic integrity
+connected learning lab
+community engagement
+elon musk
+ics project expo
+information retrieval
+international applicants
+introduction to programming
+james jones
+marios papaefthymiou
+mit

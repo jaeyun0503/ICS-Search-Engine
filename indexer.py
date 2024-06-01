@@ -1,12 +1,12 @@
 import json
 import math
 import os
-import pickle
 import re
 import sys
 import csv
 import simhash
 import Levenshtein
+import time
 
 from bs4 import BeautifulSoup
 from collections import defaultdict
@@ -29,15 +29,15 @@ class Indexer:
 
         # dictionary with weights for different html tags
         self.weights = {
-            'title': 50,
-            'h1': 35,
-            'h2': 30,
-            'h3': 25,
-            'h4': 20,
-            'h5': 15,
-            'h6': 10,
-            'bold': 5,
-            'strong': 5,
+            'title': 5,
+            'h1': 4.5,
+            'h2': 4,
+            'h3': 3.5,
+            'h4': 3,
+            'h5': 2.5,
+            'h6': 2,
+            'bold': 1,
+            'strong': 1,
         }
 
         # index structure
@@ -103,8 +103,6 @@ class Indexer:
 
                     except Exception as e:
                         print(e)
-                    #     # raise e
-                    #     print("error: ", e)
 
                 self.doc_id += 1
                 print(self.doc_id)
@@ -131,10 +129,6 @@ class Indexer:
                 stemmed = self.stemmer.stem(token)
                 token_list.append(stemmed)
 
-                # checks if the token is not already in the index, and updates it accordingly
-                # if token not in self.index:
-                #     self.index[token] = {"document_frequency": 0, self.doc_id: {}}
-                
                 # increments token count
                 words[stemmed] += 1
 
@@ -144,10 +138,6 @@ class Indexer:
             return False
 
         self.crawled_pages.add(hash_value)
-
-        # for i in token_list:
-        #     if i not in self.index:
-        #             self.index[i] = {"document_frequency": 0, self.doc_id: {}}
 
         # updates token's document frequency
         for key, value in words.items():
@@ -173,7 +163,7 @@ class Indexer:
 
     def offload(self):
         """
-        Offloads the data into pkl files
+        Offloads the data into JSON files
         """
         directory_path = "./res"
         if not os.path.exists(directory_path):
@@ -187,7 +177,7 @@ class Indexer:
 
     def merge(self):
         """
-        Retrieving data from different pickle files, creates a final data file and a reference index file
+        Retrieving data from different JSON files, creates a final data file and a reference index file
         """
         result_index = {}
         # Loops over every pkl file
@@ -265,11 +255,11 @@ class Indexer:
 
 
 if __name__ == '__main__':
+    t = time.time()
     indexer = Indexer()
     indexer.parse_files()
     result = indexer.merge()
 
     print("Unique tokens:", len(indexer.index))
     print("Number of documents:", indexer.doc_id + 1)
-    # total = sum(os.path.getsize(f'./res/temporary_save_{i}.pkl') for i in range(indexer.partial_count)) / 1024
-    # print("Total size in disk:", total, "KB")
+    print("Time spent:", time.time() - t)
